@@ -19,17 +19,25 @@ df = pd.read_csv("E:/data/ExprimentField/manhatan/Poi_NYC_Manhatan.csv", encodin
 df.head()
 coords = df[['latitude', 'longitude']].values
 kms_per_radian = 6371.0088
-epsilon = 0.1/ kms_per_radian
+epsilon = 2/ kms_per_radian
 start_time = time.time()
-db = DBSCAN(eps=epsilon, min_samples=5, algorithm='ball_tree', metric='haversine').fit(np.radians(coords))
+db = DBSCAN(eps=epsilon, min_samples=10, algorithm='ball_tree', metric="haversine").fit(np.radians(coords))
 cluster_labels = db.labels_
 num_clusters = len(set(cluster_labels))
 # turn the clusters in to a pandas series, where each element is a cluster of points
 clusters = pd.Series([coords[cluster_labels == n] for n in range(num_clusters)])
+
+
 message = 'Clustered {:,} points down to {:,} clusters, for {:.1f}% compression in {:,.2f} seconds'
 print(message.format(len(df), num_clusters, 100*(1 - float(num_clusters) / len(df)), time.time()-start_time))
 print('Silhouette coefficient: {:0.03f}'.format(metrics.silhouette_score(coords, cluster_labels)))
-# print('Number of clusters: {}'.format(num_clusters))
+print('Number of clusters: {}'.format(num_clusters))
+clusters = clusters[0:-1]
+
+cluster_list = list(set(cluster_labels))
+cluster_list = cluster_list[0:-1]
+num_clusters = len(cluster_list)
+print(num_clusters)
 
 centermost_points = clusters.map(get_centermost_point)
 
