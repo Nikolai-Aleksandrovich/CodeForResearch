@@ -19,9 +19,9 @@ df = pd.read_csv("E:/data/ExprimentField/manhatan/Poi_NYC_Manhatan.csv", encodin
 df.head()
 coords = df[['latitude', 'longitude']].values
 kms_per_radian = 6371.0088
-epsilon = 2/ kms_per_radian
+epsilon = 0.015/ kms_per_radian
 start_time = time.time()
-db = DBSCAN(eps=epsilon, min_samples=10, algorithm='ball_tree', metric="haversine").fit(np.radians(coords))
+db = DBSCAN(eps=epsilon, min_samples=5, algorithm='ball_tree', metric="haversine").fit(np.radians(coords))
 cluster_labels = db.labels_
 num_clusters = len(set(cluster_labels))
 # turn the clusters in to a pandas series, where each element is a cluster of points
