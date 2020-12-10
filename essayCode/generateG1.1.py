@@ -30,23 +30,24 @@ def getPOIFromCSVtoGraph(filePath, G):
     for line in f.readlines():
         itemsCount = itemsCount + 1
         # if count!=1:
-        lines = line.strip().split(";")
+        lines = line.strip().split(",")
         if NodesCount in G:
             repeatedItemsCount = repeatedItemsCount + 1
             continue
             # print True
-        if len(lines) == 8:
+        if len(lines) == 9:
+
             # 求该POI的信息熵
-            if float(lines[4]) < 1:
-                continue
-
-            c = float(lines[4])
-            if float(lines[5]) < 1e-6:
-                n = 1
-            else:
-                n = float(lines[5])
-
-            InformationEntropyValue = (c / n) * math.log(n)
+            # if float(lines[4]) < 1:
+            #     continue
+            #
+            # c = float(lines[4])
+            # if float(lines[5]) < 1e-6:
+            #     n = 1
+            # else:
+            #     n = float(lines[5])
+            #
+            # InformationEntropyValue = (c / n) * math.log(n)
 
             # G.add_node(NodesCount,name=lines[0],checkInCount=lines[4],
             #     checkInUsersNumebr=lines[5],latitude=float(lines[6]),
@@ -78,7 +79,7 @@ def getPOIFromCSVtoGraph(filePath, G):
     print('Total time spent on loading POI data {:.5f} second.'.format(cost_time))
     print("--------Done!--------")
     lontitudelatitudeArray = np.array(lontitudelatitudeList)
-    nx.write_weighted_edgelist(G, 'POI.weighted.edgelist', comments='#', delimiter=' ', encoding='utf-8')
+    # nx.write_weighted_edgelist(G, 'POI.weighted.edgelist', comments='#', delimiter=' ', encoding='utf-8')
     return G, lontitudelatitudeArray
 
 
@@ -176,7 +177,7 @@ def getAttrFromCSVtoGraph(filePath, G, lontitudelatitudeArray, mytree, IfPrint):
         print("The number of edges:" + str(G.number_of_edges()))
         print('Total time spent on loading car data {:.5f} second.'.format(cost_time))
         print("--------Done!--------")
-    nx.write_weighted_edgelist(G, 'Attr.weighted.edgelist', comments='#', delimiter=' ', encoding='utf-8')
+    # nx.write_weighted_edgelist(G, 'Attr.weighted.edgelist', comments='#', delimiter=' ', encoding='utf-8')
     return G
 
 
@@ -246,15 +247,15 @@ def getEdgesFromCSVtoGraph(filePath, G, lontitudelatitudeArray, mytree, IfPrint)
                         # print ""
 
                         # 空车时间，计算指向哪个时间节点
-                        EmptyTime = first[6]
-                        pickUpTime = second[5]
-
-                        get_time = str(EmptyTime).rpartition(' ')[-1]
-                        # print(get_time)
-                        get_hour1 = str(get_time).rpartition(':')[0]
-                        get_hour = str(get_hour1).rpartition(':')[0]
-
-                        a = int(get_hour)
+                        # EmptyTime = first[6]
+                        # pickUpTime = second[5]
+                        #
+                        # get_time = str(EmptyTime).rpartition(' ')[-1]
+                        # # print(get_time)
+                        # get_hour1 = str(get_time).rpartition(':')[0]
+                        # get_hour = str(get_hour1).rpartition(':')[0]
+                        #
+                        # a = int(get_hour)
                         # if a > 5 and a < 8:  # G0:6:00-7:59  G1:8:00-11:59  G2:12:00-13:59  G3:14-17  G4:17-19
                         # G5:19-22  G6:22-next6 G = listG[0] elif a > 7 and a < 12: G = listG[1] elif a > 11 and a < 14:
                         # G = listG[2] elif a > 13 and a < 18: G = listG[3] elif a > 17 and a < 20: G = listG[4] elif a >
@@ -366,7 +367,7 @@ def getEdgesFromCSVtoGraph(filePath, G, lontitudelatitudeArray, mytree, IfPrint)
         print("The number of valid edges:" + str(ValidCount))
         print('Total time spent on loading car data {:.5f} second.'.format(cost_time))
         print("--------Done!--------")
-    nx.write_weighted_edgelist(G, 'Edge.weighted.edgelist', comments='#', delimiter=' ', encoding='utf-8')
+    # nx.write_weighted_edgelist(G, 'Edge.weighted.edgelist', comments='#', delimiter=' ', encoding='utf-8')
     return G
 
     # --------------------以下函数是用于寻找经纬度坐标最近的POI点----------
@@ -393,7 +394,7 @@ def deleteNode(G, number):
     print("The number of all nodes:" + str(G.number_of_nodes()))
     print("The number of edges:" + str(G.number_of_edges()))
     print("--------End of Delete POI Nodes--------")
-    nx.write_weighted_edgelist(G, 'delete.weighted.edgelist', comments='#', delimiter=' ', encoding='utf-8')
+    # nx.write_weighted_edgelist(G, 'delete.weighted.edgelist', comments='#', delimiter=' ', encoding='utf-8')
     return G
 
 
@@ -438,7 +439,7 @@ def haversine(lon1, lat1, lon2, lat2):  # 经度1，纬度1，经度2，纬度2 
 G = nx.DiGraph()
 
 # 创建图中的一类节点 为POI bipartite=0
-filePath = "./data/PoIs_NYC.txt"
+filePath = "E:/data/ExprimentField/manhatan/Poi_NYC_Manhatan_DBSCAN.csv"
 G, lontitudelatitudeArray = getPOIFromCSVtoGraph(filePath, G)
 # print lontitudelatitudeArray
 # 创建POI坐标的KDTree
@@ -448,7 +449,7 @@ mytree = creatKdTree(lontitudelatitudeArray)
 # G=gd.getTimeNodestoGraph(filePath,G)
 
 # nx.draw_networkx(G)
-filePathtest = "./data/10%of10%.csv"
+filePathtest = "E:/data/ExprimentField/timedivide/trip_data1/timeSlot0.csv"
 filePath1 = "./data/trip_data_1.csv"
 filePath2 = "./data/trip_data_2.csv"
 filePath3 = "./data/trip_data_3.csv"
@@ -456,16 +457,16 @@ filePath4 = "./data/trip_data_4.csv"
 filePath5 = "./data/trip_data_5.csv"
 filePath6 = "./data/trip_data_6.csv"
 IfPrint = 0
-# G = getAttrFromCSVtoGraph(filePathtest, G, lontitudelatitudeArray, mytree, IfPrint)
-G = getAttrFromCSVtoGraph(filePath1, G, lontitudelatitudeArray, mytree, IfPrint)
+G = getAttrFromCSVtoGraph(filePathtest, G, lontitudelatitudeArray, mytree, IfPrint)
+# G = getAttrFromCSVtoGraph(filePath1, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getAttrFromCSVtoGraph(filePath2, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getAttrFromCSVtoGraph(filePath3, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getAttrFromCSVtoGraph(filePath4, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getAttrFromCSVtoGraph(filePath5, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getAttrFromCSVtoGraph(filePath6, G, lontitudelatitudeArray, mytree, IfPrint)
 G = deleteNode(G, 0)
-# G = getEdgesFromCSVtoGraph(filePathtest, G, lontitudelatitudeArray, mytree, IfPrint)
-G = getEdgesFromCSVtoGraph(filePath1, G, lontitudelatitudeArray, mytree, IfPrint)
+G = getEdgesFromCSVtoGraph(filePathtest, G, lontitudelatitudeArray, mytree, IfPrint)
+# G = getEdgesFromCSVtoGraph(filePath1, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getEdgesFromCSVtoGraph(filePath2, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getEdgesFromCSVtoGraph(filePath3, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getEdgesFromCSVtoGraph(filePath4, G, lontitudelatitudeArray, mytree, IfPrint)

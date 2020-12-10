@@ -57,9 +57,9 @@ def splitCSVtoTimeSlot(filePath):
                 timeSlot2.append(line)
             elif (get_hour_num >= 12 and get_hour_num < 14):
                 timeSlot3.append(line)
-            elif (get_hour_num >= 14 and get_hour_num < 19):
+            elif (get_hour_num >= 14 and get_hour_num < 17):
                 timeSlot4.append(line)
-            elif (get_hour_num >= 19 and get_hour_num < 22):
+            elif (get_hour_num >= 17 and get_hour_num < 19):
                 timeSlot5.append(line)
             else:
                 timeSlot6.append(line)
@@ -112,7 +112,7 @@ def splitCSVtoTimeSlot(filePath):
             #      " pickup_latitude", " dropoff_longitude", " dropoff_latitude"])
             for row in timeSlot5:
                 writer.writerow(row)
-        with open("E:/data/ExprimentField/timedivide/trip_data1/timeSlot5.csv", "a", newline="") as csvfile:
+        with open("E:/data/ExprimentField/timedivide/trip_data1/timeSlot6.csv", "a", newline="") as csvfile:
             writer = csv.writer(csvfile)
             # writer.writerow(
             #     ["medallion", "hack_license", "vendor_id", "rate_code", "store_and_fwd_flag", "pickup_datetime",

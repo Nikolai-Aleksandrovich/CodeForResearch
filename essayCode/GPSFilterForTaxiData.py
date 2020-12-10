@@ -40,7 +40,7 @@ def getAttrFromCSVtoGraph(filePath):
                 validateNumber=validateNumber+1
             else:
                 inValidateNumber=inValidateNumber+1
-        with open("E:/data/ExprimentField/manhatan/trip_data1_Manhatan.csv", "a", newline="") as csvfile:
+        with open("E:/data/ExprimentField/manhatan/trip_data4_Manhatan.csv", "a", newline="") as csvfile:
             writer = csv.writer(csvfile)
             # writer.writerow(["medallion", "hack_license", "vendor_id", "rate_code", "store_and_fwd_flag", "pickup_datetime", " dropoff_datetime", " passenger_count"," trip_time_in_secs"," trip_distance"," pickup_longitude"," pickup_latitude"," dropoff_longitude"," dropoff_latitude"])
             for row in validateList:
@@ -66,5 +66,5 @@ def judgerOfGps(longitude,latitude):
         b=(polyNY_shapely.contains(coordinates_shapely[pp]))
     return b
 
-filePath = "E:/data/ExprimentField/trip_data_1.csv"
+filePath = "E:/data/ExprimentField/trip_data_4.csv"
 getAttrFromCSVtoGraph(filePath)
