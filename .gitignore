@@ -1,0 +1,17 @@
+
+FAME-master/.gitattributes
+FAME-master/.gitattributes
+FAME-master/.gitattributes
+FAME-master/__pycache__/evaluate.cpython-37.pyc
+FAME-master/__pycache__/utils.cpython-37.pyc
+FAME-master/data/IMDB/feature.zip
+FAME-master/data/IMDB/feature/feature.txt
+FAME-master/data/IMDB/test.txt
+FAME-master/data/IMDB/feature.zip
+FAME-master/__pycache__/fastrp.cpython-37.pyc
+FAME-master/data/IMDB/valid.txt
+FAME-master/data/IMDB/feature/feature.txt
+FAME-master/models/logreg.py
+FAME-master/requirements.txt
+FAME-master/utils.py
+FAME-master/.gitattributes

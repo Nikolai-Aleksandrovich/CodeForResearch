@@ -64,7 +64,7 @@ def splitCSVtoTimeSlot(filePath):
             else:
                 timeSlot6.append(line)
 
-        with open("E:/data/ExprimentField/timedivide/trip_data1/timeSlot0.csv", "a", newline="") as csvfile:
+        with open("E:/data/ExprimentField/timedivide/trip_data6/timeSlot0.csv", "a", newline="") as csvfile:
             writer = csv.writer(csvfile)
             # writer.writerow(
             #     ["medallion", "hack_license", "vendor_id", "rate_code", "store_and_fwd_flag", "pickup_datetime",
@@ -72,7 +72,7 @@ def splitCSVtoTimeSlot(filePath):
             #      " pickup_latitude", " dropoff_longitude", " dropoff_latitude"])
             for row in timeSlot0:
                 writer.writerow(row)
-        with open("E:/data/ExprimentField/timedivide/trip_data1/timeSlot1.csv", "a", newline="") as csvfile:
+        with open("E:/data/ExprimentField/timedivide/trip_data6/timeSlot1.csv", "a", newline="") as csvfile:
             writer = csv.writer(csvfile)
             # writer.writerow(
             #     ["medallion", "hack_license", "vendor_id", "rate_code", "store_and_fwd_flag", "pickup_datetime",
@@ -80,7 +80,7 @@ def splitCSVtoTimeSlot(filePath):
             #      " pickup_latitude", " dropoff_longitude", " dropoff_latitude"])
             for row in timeSlot1:
                 writer.writerow(row)
-        with open("E:/data/ExprimentField/timedivide/trip_data1/timeSlot2.csv", "a", newline="") as csvfile:
+        with open("E:/data/ExprimentField/timedivide/trip_data6/timeSlot2.csv", "a", newline="") as csvfile:
             writer = csv.writer(csvfile)
             # writer.writerow(
             #     ["medallion", "hack_license", "vendor_id", "rate_code", "store_and_fwd_flag", "pickup_datetime",
@@ -88,7 +88,7 @@ def splitCSVtoTimeSlot(filePath):
             #      " pickup_latitude", " dropoff_longitude", " dropoff_latitude"])
             for row in timeSlot2:
                 writer.writerow(row)
-        with open("E:/data/ExprimentField/timedivide/trip_data1/timeSlot3.csv", "a", newline="") as csvfile:
+        with open("E:/data/ExprimentField/timedivide/trip_data6/timeSlot3.csv", "a", newline="") as csvfile:
             writer = csv.writer(csvfile)
             # writer.writerow(
             #     ["medallion", "hack_license", "vendor_id", "rate_code", "store_and_fwd_flag", "pickup_datetime",
@@ -96,7 +96,7 @@ def splitCSVtoTimeSlot(filePath):
             #      " pickup_latitude", " dropoff_longitude", " dropoff_latitude"])
             for row in timeSlot3:
                 writer.writerow(row)
-        with open("E:/data/ExprimentField/timedivide/trip_data1/timeSlot4.csv", "a", newline="") as csvfile:
+        with open("E:/data/ExprimentField/timedivide/trip_data6/timeSlot4.csv", "a", newline="") as csvfile:
             writer = csv.writer(csvfile)
             # writer.writerow(
             #     ["medallion", "hack_license", "vendor_id", "rate_code", "store_and_fwd_flag", "pickup_datetime",
@@ -104,7 +104,7 @@ def splitCSVtoTimeSlot(filePath):
             #      " pickup_latitude", " dropoff_longitude", " dropoff_latitude"])
             for row in timeSlot4:
                 writer.writerow(row)
-        with open("E:/data/ExprimentField/timedivide/trip_data1/timeSlot5.csv", "a", newline="") as csvfile:
+        with open("E:/data/ExprimentField/timedivide/trip_data6/timeSlot5.csv", "a", newline="") as csvfile:
             writer = csv.writer(csvfile)
             # writer.writerow(
             #     ["medallion", "hack_license", "vendor_id", "rate_code", "store_and_fwd_flag", "pickup_datetime",
@@ -112,7 +112,7 @@ def splitCSVtoTimeSlot(filePath):
             #      " pickup_latitude", " dropoff_longitude", " dropoff_latitude"])
             for row in timeSlot5:
                 writer.writerow(row)
-        with open("E:/data/ExprimentField/timedivide/trip_data1/timeSlot6.csv", "a", newline="") as csvfile:
+        with open("E:/data/ExprimentField/timedivide/trip_data6/timeSlot6.csv", "a", newline="") as csvfile:
             writer = csv.writer(csvfile)
             # writer.writerow(
             #     ["medallion", "hack_license", "vendor_id", "rate_code", "store_and_fwd_flag", "pickup_datetime",
@@ -137,5 +137,5 @@ def splitCSVtoTimeSlot(filePath):
         print("--------Done!--------")
 
 
-filePath = "E:/data/ExprimentField/manhatan/trip_data1_Manhatan.csv"
+filePath = "E:/data/ExprimentField/manhatan/trip_data6_Manhatan.csv"
 splitCSVtoTimeSlot(filePath)
