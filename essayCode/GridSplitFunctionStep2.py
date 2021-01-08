@@ -8,6 +8,7 @@ import csv
 from shapely.geometry import mapping, shape, Polygon, MultiPoint
 import shapely.wkt as wkt
 import folium
+#find the most important point between single grid
 def getPOIFromCSVtoGraph(filePath):
     start_time = time.time()
     print("--------Loading POI data--------")

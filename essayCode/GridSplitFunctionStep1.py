@@ -1,5 +1,6 @@
 import pandas as pd
 import random
+#这函数是为每个gps点分配网格id lable
 LON1 = 40.694339
 LON2 = 40.860598
 LAT1 = -74.035471
@@ -30,4 +31,3 @@ def generalID(lon,lat,column_num,row_num):
 
 data1['label'] = data1.apply(lambda x: generalID(x[0], x[1],100,100), axis = 1)
 data1.to_csv('E:/data/ExprimentField/manhatan/Poi_NYC_Manhatan_GridDivide.csv', encoding='utf-8')
-print(data1)
