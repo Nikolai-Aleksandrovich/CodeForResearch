@@ -1,20 +1,33 @@
+import datetime
+import os
+import h5py
+import numpy as np
 import pandas as pd
-import csv
+# #
+# # data = pd.HDFStore("E:/BaseLine/Trec-master/models/weigts.01-0.00.hdf5")
+# with h5py.File("E:/BaseLine/Trec-master/models/weigts.01-0.00.hdf5") as f:
+#     for key in f.keys():
+#         print(key)
+#     data = f['model_weights']
+#     print(data[1])
 
-filePathtest = "E:/data/ExprimentField/test/newtimeSlot0.csv"
-data = pd.read_csv(filePathtest)
+f = h5py.File("E:/BaseLine/Trec-master/models/weigts.01-0.00.hdf5",'r')   #打开h5文件
+print(list(f.keys()))
+dset_m = f['model_weights']
+dset_o=f['optimizer_weights']
+print("dset_m",list(dset_m.keys()))
+print("dset_o",list(dset_o.keys()))
+dset1=dset_m['embedding_1']
+dset2=dset_o['Adam']
+dset3=dset2['iterations:0']
+print(dset3.shape)
+print(dset3)
+print(list(dset2.keys()))
 
-# data_new = data.drop(["hack_license"], axis=1)  # 删除title这列数据
-# data_new = data_new.drop(["vendor_id"], axis=1)
-# data_new = data_new.drop(["rate_code"], axis=1)
-# data_new = data_new.drop(["store_and_fwd_flag"], axis=1)
-data_new = data.drop([" passenger_count"], axis=1)
 
-
-
-
-
-# 、、、、对于data进行多次操作，如果想要连续操作，记得都将.号之前的主语改成同一pandas对象，
-# 比如前来两个操作，第二个主语需要改成data_new对象。如果想要保存新的csv文件，则为：
-
-data_new.to_csv("E:/data/ExprimentField/test/newTimeSlot0.csv", index=0)
+# print(dset.shape)
+# print(dset.dtype)
+# print(f.keys())                            #可以查看所有的主键
+# # a = f['data'][:]                    #取出主键为data的所有的键值
+# print(f['model_weights'][:] )
+# f.close()
