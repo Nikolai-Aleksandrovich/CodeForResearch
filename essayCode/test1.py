@@ -1,33 +1,37 @@
-import datetime
-import os
-import h5py
-import numpy as np
 import pandas as pd
-# #
-# # data = pd.HDFStore("E:/BaseLine/Trec-master/models/weigts.01-0.00.hdf5")
-# with h5py.File("E:/BaseLine/Trec-master/models/weigts.01-0.00.hdf5") as f:
-#     for key in f.keys():
-#         print(key)
-#     data = f['model_weights']
-#     print(data[1])
+import random
+#TRec2：找到gps所属的网格
+LON1 = 40.694339
+LON2 = 40.860598
+LAT1 = -74.035471
+LAT2 = -73.926392
+df = pd.read_csv("E:/data/ExprimentField/test/timeSlot0_new.csv", encoding='utf-8')
+df.head()
+data1 = df[[' pickup_latitude', ' pickup_longitude']].values
+data2 = df[[' dropoff_latitude', ' dropoff_longitude']].values
+data3=pd.DataFrame(data1)
+data4=pd.DataFrame(data2)
 
-f = h5py.File("E:/BaseLine/Trec-master/models/weigts.01-0.00.hdf5",'r')   #打开h5文件
-print(list(f.keys()))
-dset_m = f['model_weights']
-dset_o=f['optimizer_weights']
-print("dset_m",list(dset_m.keys()))
-print("dset_o",list(dset_o.keys()))
-dset1=dset_m['embedding_1']
-dset2=dset_o['Adam']
-dset3=dset2['iterations:0']
-print(dset3.shape)
-print(dset3)
-print(list(dset2.keys()))
+def generalID(lon,lat,column_num,row_num):
+    # 若在范围外的点，返回-1
+    # if lon <= LON1 or lon >= LON2 or lat <= LAT1 or lat >= LAT2:
+    #     return -1
+    # 把经度范围根据列数等分切割
+    column = (LON2 - LON1)/column_num
+    # 把纬度范围根据行数数等分切割
+    row = (LAT2 - LAT1)/row_num
+    # 二维矩阵坐标索引转换为一维ID，即： （列坐标区域（向下取整）+ 1） + （行坐标区域 * 列数）
+    return int((lon-LON1)/column)+ 1 + int((lat-LAT1)/row) * column_num
 
 
-# print(dset.shape)
-# print(dset.dtype)
-# print(f.keys())                            #可以查看所有的主键
-# # a = f['data'][:]                    #取出主键为data的所有的键值
-# print(f['model_weights'][:] )
-# f.close()
+data3['label'] = data3.apply(lambda x: generalID(x[0], x[1],53,53), axis = 1)
+data4['label'] = data4.apply(lambda x: generalID(x[0], x[1],53,53), axis = 1)
+# data_new_pickup = data3.drop([""],axis = 1)
+# data_new_pickup = data3.drop(["0"],axis = 1)
+# data_new_pickup = data_new_pickup.drop(["1"],axis = 1)
+
+# data_new_dropoff = data4.drop([""],axis = 1)
+# data_new_dropoff = data4.drop(["0"],axis = 1)
+# data_new_dropoff = data_new_dropoff.drop(["1"],axis = 1)
+data3.to_csv('E:/data/ExprimentField/test/timeSlot0_new_pickup.csv', encoding='utf-8')
+data4.to_csv('E:/data/ExprimentField/test/timeSlot0_new_dropoff.csv', encoding='utf-8')
