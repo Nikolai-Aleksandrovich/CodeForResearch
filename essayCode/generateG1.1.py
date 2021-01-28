@@ -31,9 +31,9 @@ def getPOIFromCSVtoGraph(filePath, G):
         itemsCount = itemsCount + 1
         # if count!=1:
         lines = line.strip().split(",")
-        if NodesCount in G:
-            repeatedItemsCount = repeatedItemsCount + 1
-            continue
+        # if NodesCount in G:
+        #     repeatedItemsCount = repeatedItemsCount + 1
+        #     continue
             # print True
         if len(lines) == 9:
 
@@ -64,7 +64,7 @@ def getPOIFromCSVtoGraph(filePath, G):
             # 将图中的POI节点的经纬度坐标放进列表中
             lontitudelatitudeList.append([float(lines[7]), float(lines[6])])
         else:
-            # print lines
+            print (lines)
             invalidItemNumber = invalidItemNumber + 1
     f.close()
 
@@ -441,7 +441,7 @@ def haversine(lon1, lat1, lon2, lat2):  # 经度1，纬度1，经度2，纬度2 
 G = nx.DiGraph()
 
 # 创建图中的一类节点 为POI bipartite=0
-filePath = "E:/data/ExprimentField/manhatan/Poi_NYC_Manhatan_DBSCAN.csv"
+filePath = "E:/data/ExprimentField/test/Poi_NYC_Manhatan_GridDivideFinal.csv"
 G, lontitudelatitudeArray = getPOIFromCSVtoGraph(filePath, G)
 # print lontitudelatitudeArray
 # 创建POI坐标的KDTree
@@ -451,7 +451,7 @@ mytree = creatKdTree(lontitudelatitudeArray)
 # G=gd.getTimeNodestoGraph(filePath,G)
 
 # nx.draw_networkx(G)
-filePathtest = "E:/data/ExprimentField/timedivide/trip_data1/timeSlot0.csv"
+filePathtest = "E:/data/ExprimentField/test/timeSlot0.csv"
 filePath1 = "./data/trip_data_1.csv"
 filePath2 = "./data/trip_data_2.csv"
 filePath3 = "./data/trip_data_3.csv"
@@ -465,8 +465,8 @@ G = getAttrFromCSVtoGraph(filePathtest, G, lontitudelatitudeArray, mytree, IfPri
 # G = getAttrFromCSVtoGraph(filePath3, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getAttrFromCSVtoGraph(filePath4, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getAttrFromCSVtoGraph(filePath5, G, lontitudelatitudeArray, mytree, IfPrint)
-# G = getAttrFromCSVtoGraph(filePath6, G, lontitudelatitudeArray, mytree, IfPrint)
-G = deleteNode(G, 0)
+# # G = getAttrFromCSVtoGraph(filePath6, G, lontitudelatitudeArray, mytree, IfPrint)
+# G = deleteNode(G, 0)
 G = getEdgesFromCSVtoGraph(filePathtest, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getEdgesFromCSVtoGraph(filePath1, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getEdgesFromCSVtoGraph(filePath2, G, lontitudelatitudeArray, mytree, IfPrint)
