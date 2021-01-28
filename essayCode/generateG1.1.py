@@ -38,16 +38,16 @@ def getPOIFromCSVtoGraph(filePath, G):
         if len(lines) == 9:
 
             # 求该POI的信息熵
-            # if float(lines[4]) < 1:
-            #     continue
-            #
-            # c = float(lines[4])
-            # if float(lines[5]) < 1e-6:
-            #     n = 1
-            # else:
-            #     n = float(lines[5])
-            #
-            # InformationEntropyValue = (c / n) * math.log(n)
+            if float(lines[4]) < 1:
+                continue
+
+            c = float(lines[4])
+            if float(lines[5]) < 1e-6:
+                n = 1
+            else:
+                n = float(lines[5])
+
+            InformationEntropyValue = (c / n) * math.log(n)
 
             # G.add_node(NodesCount,name=lines[0],checkInCount=lines[4],
             #     checkInUsersNumebr=lines[5],latitude=float(lines[6]),
@@ -57,7 +57,7 @@ def getPOIFromCSVtoGraph(filePath, G):
             #            lontitude=float(lines[7]),
             #            InformationEntropy=InformationEntropyValue, pickUpFrequency=0, dropOffFrequency=0,
             #            totalVisitFrequency=0)
-            G.add_node(NodesCount,totalVisitFrequency=0)
+            G.add_node(NodesCount,totalVisitFrequency=0,informationEntropy=InformationEntropyValue)
 
             NodesCount = NodesCount + 1
 
@@ -84,6 +84,7 @@ def getPOIFromCSVtoGraph(filePath, G):
 
 
 def getAttrFromCSVtoGraph(filePath, G, lontitudelatitudeArray, mytree, IfPrint):
+    # 逐条计算旅途，为一个节点添加“度”属性的值
     start_time = time.time()
     print("--------Add Attr--------")
     chunksize = 10 ** 6
@@ -182,6 +183,7 @@ def getAttrFromCSVtoGraph(filePath, G, lontitudelatitudeArray, mytree, IfPrint):
 
 
 def getEdgesFromCSVtoGraph(filePath, G, lontitudelatitudeArray, mytree, IfPrint):
+    # 添加权重
     start_time = time.time()
     print("--------Add Edges--------")
     chunksize = 10 ** 6

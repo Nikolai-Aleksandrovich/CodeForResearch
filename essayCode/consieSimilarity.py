@@ -51,7 +51,7 @@ def getNDCG(rank_list, pos_items):
     it2rel = {it: r for it, r in zip(pos_items, relevance)}
     rank_scores = np.asarray([it2rel.get(it, 0.0) for it in rank_list], dtype=np.float32)
 
-    idcg = getDCG(np.sort(relevance)[::-1])
+    idcg = getDCG(np    .sort(relevance)[::-1])
 
     dcg = getDCG(rank_scores)
 

@@ -97,15 +97,6 @@ def getPOIFromCSVtoGraph(filePath, G):
 
 # 根据出租车行驶数据给图添加边
 def getEdgesFromCSVtoGraph(filePath, G, lontitudelatitudeArray, mytree, IfPrint):
-    # G1:6-8  G2:8-12  G3:12-14  G4:14-17  G5:17-19  G6:19-22  G7:22-next6
-    # G0 = G
-    # G1 = G
-    # G2 = G
-    # G3 = G
-    # G4 = G
-    # G5 = G
-    # G6 = G
-    # listG = [G0, G1, G2, G3, G4, G5, G6]
     start_time = time.time()
     print("--------Add Edges--------")
     try:
@@ -173,15 +164,15 @@ def getEdgesFromCSVtoGraph(filePath, G, lontitudelatitudeArray, mytree, IfPrint)
                     # print ""
 
                     # 空车时间，计算指向哪个时间节点
-                    EmptyTime = first[6]
-                    pickUpTime = second[5]
+                    # EmptyTime = first[6]
+                    # pickUpTime = second[5]
 
-                    get_time = str(EmptyTime).rpartition(' ')[-1]
-                    # print(get_time)
-                    get_hour1 = str(get_time).rpartition(':')[0]
-                    get_hour = str(get_hour1).rpartition(':')[0]
-
-                    a = int(get_hour)
+                    # get_time = str(EmptyTime).rpartition(' ')[-1]
+                    # # print(get_time)
+                    # get_hour1 = str(get_time).rpartition(':')[0]
+                    # get_hour = str(get_hour1).rpartition(':')[0]
+                    #
+                    # a = int(get_hour)
                     # if a > 5 and a < 8:  # G0:6:00-7:59  G1:8:00-11:59  G2:12:00-13:59  G3:14-17  G4:17-19
                     # G5:19-22  G6:22-next6 G = listG[0] elif a > 7 and a < 12: G = listG[1] elif a > 11 and a < 14:
                     # G = listG[2] elif a > 13 and a < 18: G = listG[3] elif a > 17 and a < 20: G = listG[4] elif a >
