@@ -41,13 +41,13 @@ def getPOIFromCSVtoGraph(filePath, G):
             if float(lines[4]) < 1:
                 continue
 
-            c = float(lines[4])
-            if float(lines[5]) < 1e-6:
-                n = 1
-            else:
-                n = float(lines[5])
+            # c = float(lines[4])
+            # if float(lines[5]) < 1e-6:
+            #     n = 1
+            # else:
+            #     n = float(lines[5])
 
-            InformationEntropyValue = (c / n) * math.log(n)
+            # InformationEntropyValue = (c / n) * math.log(n)
 
             # G.add_node(NodesCount,name=lines[0],checkInCount=lines[4],
             #     checkInUsersNumebr=lines[5],latitude=float(lines[6]),
@@ -57,7 +57,8 @@ def getPOIFromCSVtoGraph(filePath, G):
             #            lontitude=float(lines[7]),
             #            InformationEntropy=InformationEntropyValue, pickUpFrequency=0, dropOffFrequency=0,
             #            totalVisitFrequency=0)
-            G.add_node(NodesCount,totalVisitFrequency=0,informationEntropy=InformationEntropyValue)
+            G.add_node(NodesCount,totalVisitFrequency=0)
+            # G.add_node(NodesCount, totalVisitFrequency=0, informationEntropy=InformationEntropyValue)
 
             NodesCount = NodesCount + 1
 
@@ -441,8 +442,8 @@ def haversine(lon1, lat1, lon2, lat2):  # 经度1，纬度1，经度2，纬度2 
 G = nx.DiGraph()
 
 # 创建图中的一类节点 为POI bipartite=0
-filePath = "E:/data/ExprimentField/test/Poi_NYC_Manhatan_GridDivideFinal.csv"
-G, lontitudelatitudeArray = getPOIFromCSVtoGraph(filePath, G)
+POIFilePath = "E:/data/ExprimentField/test/POIData/Poi_NYC_Manhatan_GridDivideFinal.csv"
+G, lontitudelatitudeArray = getPOIFromCSVtoGraph(POIFilePath, G)
 # print lontitudelatitudeArray
 # 创建POI坐标的KDTree
 mytree = creatKdTree(lontitudelatitudeArray)
@@ -451,15 +452,15 @@ mytree = creatKdTree(lontitudelatitudeArray)
 # G=gd.getTimeNodestoGraph(filePath,G)
 
 # nx.draw_networkx(G)
-filePathtest = "E:/data/ExprimentField/test/timeSlot0.csv"
-filePath1 = "./data/trip_data_1.csv"
-filePath2 = "./data/trip_data_2.csv"
-filePath3 = "./data/trip_data_3.csv"
-filePath4 = "./data/trip_data_4.csv"
-filePath5 = "./data/trip_data_5.csv"
-filePath6 = "./data/trip_data_6.csv"
+Jan0TaxiFilePath = "E:/data/ExprimentField/test/jan/jan0/train.csv"
+Jan1TaxiFilePath = "E:/data/ExprimentField/test/jan/jan1/train.csv"
+Jan2TaxiFilePath = "E:/data/ExprimentField/test/jan/jan2/train.csv"
+Jan3TaxiFilePath = "E:/data/ExprimentField/test/jan/jan3/train.csv"
+Jan4TaxiFilePath = "E:/data/ExprimentField/test/jan/jan4/train.csv"
+Jan5TaxiFilePath = "E:/data/ExprimentField/test/jan/jan5/train.csv"
+Jan6TaxiFilePath = "E:/data/ExprimentField/test/jan/jan6/train.csv"
 IfPrint = 0
-G = getAttrFromCSVtoGraph(filePathtest, G, lontitudelatitudeArray, mytree, IfPrint)
+# G = getAttrFromCSVtoGraph(filePathtest, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getAttrFromCSVtoGraph(filePath1, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getAttrFromCSVtoGraph(filePath2, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getAttrFromCSVtoGraph(filePath3, G, lontitudelatitudeArray, mytree, IfPrint)
@@ -467,7 +468,7 @@ G = getAttrFromCSVtoGraph(filePathtest, G, lontitudelatitudeArray, mytree, IfPri
 # G = getAttrFromCSVtoGraph(filePath5, G, lontitudelatitudeArray, mytree, IfPrint)
 # # G = getAttrFromCSVtoGraph(filePath6, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = deleteNode(G, 0)
-G = getEdgesFromCSVtoGraph(filePathtest, G, lontitudelatitudeArray, mytree, IfPrint)
+G = getEdgesFromCSVtoGraph(Jan0TaxiFilePath, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getEdgesFromCSVtoGraph(filePath1, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getEdgesFromCSVtoGraph(filePath2, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getEdgesFromCSVtoGraph(filePath3, G, lontitudelatitudeArray, mytree, IfPrint)
