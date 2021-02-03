@@ -373,9 +373,12 @@ def getEdgesFromCSVtoGraph(filePath, G, lontitudelatitudeArray, mytree, IfPrint)
     # nx.write_weighted_edgelist(G, 'Edge.weighted.edgelist', comments='#', delimiter=' ', encoding='utf-8')
     return G
 
-    # --------------------以下函数是用于寻找经纬度坐标最近的POI点----------
 
 
+
+
+
+# --------------------以下函数是用于寻找经纬度坐标最近的POI点----------
 def changedata(data):
     R = 6367
     phi = np.deg2rad(data[:, 1])  # LAT
@@ -459,6 +462,9 @@ Jan3TaxiFilePath = "E:/data/ExprimentField/test/jan/jan3/train.csv"
 Jan4TaxiFilePath = "E:/data/ExprimentField/test/jan/jan4/train.csv"
 Jan5TaxiFilePath = "E:/data/ExprimentField/test/jan/jan5/train.csv"
 Jan6TaxiFilePath = "E:/data/ExprimentField/test/jan/jan6/train.csv"
+Feb0TaxiFilePath = "E:/data/ExprimentField/test/feb/feb0/train.csv"
+
+
 IfPrint = 0
 # G = getAttrFromCSVtoGraph(filePathtest, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getAttrFromCSVtoGraph(filePath1, G, lontitudelatitudeArray, mytree, IfPrint)
@@ -468,7 +474,7 @@ IfPrint = 0
 # G = getAttrFromCSVtoGraph(filePath5, G, lontitudelatitudeArray, mytree, IfPrint)
 # # G = getAttrFromCSVtoGraph(filePath6, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = deleteNode(G, 0)
-G = getEdgesFromCSVtoGraph(Jan0TaxiFilePath, G, lontitudelatitudeArray, mytree, IfPrint)
+G = getEdgesFromCSVtoGraph(Feb0TaxiFilePath, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getEdgesFromCSVtoGraph(filePath1, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getEdgesFromCSVtoGraph(filePath2, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getEdgesFromCSVtoGraph(filePath3, G, lontitudelatitudeArray, mytree, IfPrint)
