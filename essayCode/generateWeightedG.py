@@ -57,7 +57,7 @@ def getPOIFromCSVtoGraph(filePath, G):
             #            InformationEntropy=InformationEntropyValue, pickUpFrequency=0, dropOffFrequency=0,
             #            totalVisitFrequency=0)
             # G.add_node(NodesCount, totalVisitFrequency=0)
-            G.add_node(NodesCount,pickUpFrequency=0, dropOffFrequency=0, informationEntropy=InformationEntropyValue)
+            G.add_node(NodesCount,pickUpFrequency=0, informationEntropy=InformationEntropyValue)
 
             NodesCount = NodesCount + 1
 
@@ -147,12 +147,12 @@ def getAttrFromCSVtoGraph(filePath, G, lontitudelatitudeArray, mytree, IfPrint):
 
                         # 在KDTree中查找空车和接到客人的位置最近的POI，返回最近距离和POI的ID
                         distance, index = queryPoint(mytree, EmptyAndpickUpPositionArray)
-                        EmptyPOI = index[0]
-                        if (EmptyPOI == 159219):
-                            continue
+                        # EmptyPOI = index[0]
+                        # if (EmptyPOI == 159219):
+                        #     continue
 
-                        G.nodes[EmptyPOI]["dropOffFrequency"] = (
-                                    nx.get_node_attributes(G, "dropOffFrequency")[EmptyPOI] + 1)
+                        # G.nodes[EmptyPOI]["dropOffFrequency"] = (
+                        #             nx.get_node_attributes(G, "dropOffFrequency")[EmptyPOI] + 1)
 
                         # G.nodes[EmptyPOI]["totalVisitFrequency"] = (
                         #         nx.get_node_attributes(G, "totalVisitFrequency")[EmptyPOI] + 1)
@@ -286,7 +286,7 @@ def getEdgesFromCSVtoGraph(filePath, G, lontitudelatitudeArray, mytree, IfPrint)
 
 
                         PickupPOI = index[1]
-                        n = G.node[int(index[1])]['pickUpFrequency']  # 该时间片内从下一条起点出发的旅途数量
+                        n = G.nodes[int(index[1])]['pickUpFrequency']  # 该时间片内从下一条起点出发的旅途数量
 
                         # print distance, index
 
@@ -307,7 +307,7 @@ def getEdgesFromCSVtoGraph(filePath, G, lontitudelatitudeArray, mytree, IfPrint)
 
                         if G.has_edge(EmptyPOI, PickupPOI):
                             # 存在边就对边的值进行权重加和
-                            current_total_x = nx.get_edge_attributes(G, 'current_total_x') + x
+                            # current_total_x = nx.get_edge_attributes(G, 'current_total_x') + x
                             # current_total_trip = nx.get_edge_attributes(G,'current_total_trip') + n
                             #  计算复杂权重的权重语句
                             G.add_edge(index[0], index[1], weight=G.edges[index[0], index[1]]['weight'] +
@@ -453,9 +453,20 @@ Jan4TaxiFilePath = "E:/data/ExprimentField/test/jan/jan4/train.csv"
 Jan5TaxiFilePath = "E:/data/ExprimentField/test/jan/jan5/train.csv"
 Jan6TaxiFilePath = "E:/data/ExprimentField/test/jan/jan6/train.csv"
 Feb0TaxiFilePath = "E:/data/ExprimentField/test/feb/feb0/train.csv"
+Feb1TaxiFilePath = "E:/data/ExprimentField/test/feb/feb1/train.csv"
+
+Jan0TaxiFilePathTest = "E:/data/ExprimentField/test/jan/jan0/test.csv"
+Jan1TaxiFilePathTest = "E:/data/ExprimentField/test/jan/jan1/test.csv"
+Jan2TaxiFilePathTest = "E:/data/ExprimentField/test/jan/jan2/test.csv"
+Jan3TaxiFilePathTest = "E:/data/ExprimentField/test/jan/jan3/test.csv"
+Jan4TaxiFilePathTest = "E:/data/ExprimentField/test/jan/jan4/test.csv"
+Jan5TaxiFilePathTest = "E:/data/ExprimentField/test/jan/jan5/test.csv"
+Jan6TaxiFilePathTest = "E:/data/ExprimentField/test/jan/jan6/test.csv"
+Feb0TaxiFilePathTest = "E:/data/ExprimentField/test/feb/feb0/test.csv"
+Feb1TaxiFilePathTest = "E:/data/ExprimentField/test/feb/feb1/test.csv"
 
 IfPrint = 0
-# G = getAttrFromCSVtoGraph(filePathtest, G, lontitudelatitudeArray, mytree, IfPrint)
+G = getAttrFromCSVtoGraph(Feb1TaxiFilePathTest, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getAttrFromCSVtoGraph(filePath1, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getAttrFromCSVtoGraph(filePath2, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getAttrFromCSVtoGraph(filePath3, G, lontitudelatitudeArray, mytree, IfPrint)
@@ -463,7 +474,7 @@ IfPrint = 0
 # G = getAttrFromCSVtoGraph(filePath5, G, lontitudelatitudeArray, mytree, IfPrint)
 # # G = getAttrFromCSVtoGraph(filePath6, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = deleteNode(G, 0)
-G = getEdgesFromCSVtoGraph(Jan0TaxiFilePath, G, lontitudelatitudeArray, mytree, IfPrint)
+G = getEdgesFromCSVtoGraph(Feb1TaxiFilePathTest, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getEdgesFromCSVtoGraph(filePath1, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getEdgesFromCSVtoGraph(filePath2, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getEdgesFromCSVtoGraph(filePath3, G, lontitudelatitudeArray, mytree, IfPrint)

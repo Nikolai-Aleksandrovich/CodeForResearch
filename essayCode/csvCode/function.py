@@ -18,7 +18,7 @@ def split_csv(path, total_len, per):
 
             if i < round(total_len * per/100):
                 # train.csv存放路径
-                csv_path = os.path.join("E:\\data\\ExprimentField\\test\\feb\\feb0", 'test.csv')
+                csv_path = os.path.join("E:\\data\\ExprimentField\\test\\feb\\feb1", 'test.csv')
                 # print(csv_path)
                 # 不存在此文件的时候，就创建
                 if not os.path.exists(csv_path):
@@ -34,7 +34,7 @@ def split_csv(path, total_len, per):
                     i += 1
             elif (i >= round(total_len * per/100)) and (i < total_len):
             	# vali.csv存放路径
-                csv_path = os.path.join("E:\\data\\ExprimentField\\test\\feb\\feb0", 'train.csv')
+                csv_path = os.path.join("E:\\data\\ExprimentField\\test\\feb\\feb1", 'train.csv')
                 print(csv_path)
                 # 不存在此文件的时候，就创建
                 if not os.path.exists(csv_path):
@@ -55,7 +55,7 @@ def split_csv(path, total_len, per):
     return
 if __name__ == '__main__':
 
-    path = 'E:\\data\\ExprimentField\\test\\feb\\feb0\\timeSlot0.csv'
+    path = 'E:\\data\\ExprimentField\\test\\feb\\feb1\\timeSlot1.csv'
     total_len = len(open(path, 'r').readlines())# csv文件行数
     per = 20 # 分割比例%
 

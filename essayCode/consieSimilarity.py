@@ -102,7 +102,7 @@ def cosine_similarity(x, y, norm=False):
 
 def getCosineSimilarityFromOut(filePath1, filePath2, filePath3, k):
     # start_time = time.time()
-
+    #测试数据的图文件
     try:
         f = open(filePath3)
     except IOError:
@@ -265,7 +265,7 @@ def getCosineSimilarityFromOut(filePath1, filePath2, filePath3, k):
 fpath1 = "./data/CosineSimilarityData/test.txt"
 fpath2 = "./data/CosineSimilarityData/train.txt"
 fpath3 = "./data/test1.weighted.edgelist"
-
+"E:/data/ExprimentField/test/feb/feb1/train.csv"
 Hit, precisionScore, recallScore, F1Score, NDCG, MAP, t = getCosineSimilarityFromOut(fpath1, fpath2, fpath3, 1)
 # file1=open("E:/Anaconda/envs/Python35/src/code/essaycode/HYYcode/data/Percision.txt","w")
 # file1.write(str(Perc))

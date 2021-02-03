@@ -455,15 +455,25 @@ mytree = creatKdTree(lontitudelatitudeArray)
 # G=gd.getTimeNodestoGraph(filePath,G)
 
 # nx.draw_networkx(G)
-Jan0TaxiFilePath = "E:/data/ExprimentField/test/jan/jan0/train.csv"
-Jan1TaxiFilePath = "E:/data/ExprimentField/test/jan/jan1/train.csv"
-Jan2TaxiFilePath = "E:/data/ExprimentField/test/jan/jan2/train.csv"
-Jan3TaxiFilePath = "E:/data/ExprimentField/test/jan/jan3/train.csv"
-Jan4TaxiFilePath = "E:/data/ExprimentField/test/jan/jan4/train.csv"
-Jan5TaxiFilePath = "E:/data/ExprimentField/test/jan/jan5/train.csv"
-Jan6TaxiFilePath = "E:/data/ExprimentField/test/jan/jan6/train.csv"
-Feb0TaxiFilePath = "E:/data/ExprimentField/test/feb/feb0/train.csv"
+Jan0TaxiFilePathTrain = "E:/data/ExprimentField/test/jan/jan0/train.csv"
+Jan1TaxiFilePathTrain = "E:/data/ExprimentField/test/jan/jan1/train.csv"
+Jan2TaxiFilePathTrain = "E:/data/ExprimentField/test/jan/jan2/train.csv"
+Jan3TaxiFilePathTrain = "E:/data/ExprimentField/test/jan/jan3/train.csv"
+Jan4TaxiFilePathTrain = "E:/data/ExprimentField/test/jan/jan4/train.csv"
+Jan5TaxiFilePathTrain = "E:/data/ExprimentField/test/jan/jan5/train.csv"
+Jan6TaxiFilePathTrain = "E:/data/ExprimentField/test/jan/jan6/train.csv"
+Feb0TaxiFilePathTrain = "E:/data/ExprimentField/test/feb/feb0/train.csv"
+Feb1TaxiFilePathTrain = "E:/data/ExprimentField/test/feb/feb1/train.csv"
 
+Jan0TaxiFilePathTest = "E:/data/ExprimentField/test/jan/jan0/test.csv"
+Jan1TaxiFilePathTest = "E:/data/ExprimentField/test/jan/jan1/test.csv"
+Jan2TaxiFilePathTest = "E:/data/ExprimentField/test/jan/jan2/test.csv"
+Jan3TaxiFilePathTest = "E:/data/ExprimentField/test/jan/jan3/test.csv"
+Jan4TaxiFilePathTest = "E:/data/ExprimentField/test/jan/jan4/test.csv"
+Jan5TaxiFilePathTest = "E:/data/ExprimentField/test/jan/jan5/test.csv"
+Jan6TaxiFilePathTest = "E:/data/ExprimentField/test/jan/jan6/test.csv"
+Feb0TaxiFilePathTest = "E:/data/ExprimentField/test/feb/feb0/test.csv"
+Feb1TaxiFilePathTest = "E:/data/ExprimentField/test/feb/feb1/test.csv"
 
 IfPrint = 0
 # G = getAttrFromCSVtoGraph(filePathtest, G, lontitudelatitudeArray, mytree, IfPrint)
@@ -474,7 +484,7 @@ IfPrint = 0
 # G = getAttrFromCSVtoGraph(filePath5, G, lontitudelatitudeArray, mytree, IfPrint)
 # # G = getAttrFromCSVtoGraph(filePath6, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = deleteNode(G, 0)
-G = getEdgesFromCSVtoGraph(Feb0TaxiFilePath, G, lontitudelatitudeArray, mytree, IfPrint)
+G = getEdgesFromCSVtoGraph(Feb1TaxiFilePathTest , G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getEdgesFromCSVtoGraph(filePath1, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getEdgesFromCSVtoGraph(filePath2, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getEdgesFromCSVtoGraph(filePath3, G, lontitudelatitudeArray, mytree, IfPrint)
@@ -486,4 +496,4 @@ G = getEdgesFromCSVtoGraph(Feb0TaxiFilePath, G, lontitudelatitudeArray, mytree, 
 
 # np.savez("adjex.npz",A)
 # nx.write_edgelist(G, "./data/test.edgelist", comments='#', delimiter=' ', data=['weight'], encoding='utf-8')
-nx.write_weighted_edgelist(G, 'test1.weighted.edgelist', comments='#', delimiter=' ', encoding='utf-8')
+nx.write_weighted_edgelist(G, 'test2.weighted.edgelist', comments='#', delimiter=' ', encoding='utf-8')
