@@ -174,7 +174,7 @@ def getCosineSimilarityFromOut(testEdgelist, trainResult, k):
     HitRatioNumber = 0
     NDCG = 0
     AveragePrecision = 0
-
+    RecommendCount=0
     for i in range(0,TrainResultCount):
         RealDestID = []
         RealWeight = []
@@ -182,6 +182,7 @@ def getCosineSimilarityFromOut(testEdgelist, trainResult, k):
         topKRealDestID = []
         for line in TestList:
             if (trainNodeID[i] == line[0]):
+                RecommendCount=RecommendCount+1
                 RealDestID.append(line[1])  # 真实对第i行值得去的K个地点
                 RealWeight.append(line[2])
                 for j in range(k):  # test[1，2，3，...，k-1,k]遍历每一个tuijian
@@ -210,13 +211,13 @@ def getCosineSimilarityFromOut(testEdgelist, trainResult, k):
                     break
                 else:
                     ifcomparefinish = False
-
-    ans = HitRatioNumber / TestitemsCount
-    precisionScore = precisionScore / TestitemsCount
-    recallScore = recallScore / TestitemsCount
+    print(RecommendCount)
+    ans = HitRatioNumber / RecommendCount
+    precisionScore = precisionScore / RecommendCount
+    recallScore = recallScore / RecommendCount
     F1Score = ((precisionScore * recallScore * 2) / (precisionScore + recallScore))
-    NDCG = NDCG / TestitemsCount
-    MAP = AveragePrecision / TestitemsCount
+    NDCG = NDCG / RecommendCount
+    MAP = AveragePrecision / RecommendCount
     end_time = time.time()
     cost_time = (end_time - start_time)
     print('Total time spent on loading car data {:.5f} second.'.format(cost_time))
@@ -226,7 +227,7 @@ def getCosineSimilarityFromOut(testEdgelist, trainResult, k):
 
 testEdgelist = "E:/data/ExprimentField/test/jan/jan1/5测试图G/test.weighted.edgelist"
 trainResult = "E:/data/ExprimentField/test/jan/jan1/4训练结果/result.txt"
-fpath3 = "./data/test1.weighted.edgelist"
+
 
 
 Hit, precisionScore, recallScore, F1Score, NDCG, MAP, t = getCosineSimilarityFromOut(testEdgelist, trainResult, 10)
