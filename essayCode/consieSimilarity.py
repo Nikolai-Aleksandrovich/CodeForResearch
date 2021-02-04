@@ -175,6 +175,7 @@ def getCosineSimilarityFromOut(testEdgelist, trainResult, k):
     NDCG = 0
     AveragePrecision = 0
     RecommendCount=0
+    realCount = TrainResultCount
     for i in range(0,TrainResultCount):
         RealDestID = []
         RealWeight = []
@@ -185,18 +186,28 @@ def getCosineSimilarityFromOut(testEdgelist, trainResult, k):
                 RecommendCount=RecommendCount+1
                 RealDestID.append(line[1])  # 真实对第i行值得去的K个地点
                 RealWeight.append(line[2])
-                for j in range(k):  # test[1，2，3，...，k-1,k]遍历每一个tuijian
-                    RecommendDestID.append(trainNodeID[TopKIndex[i][j]])  # 推荐系统认为对第i行值得去的K个地点
+        for j in range(k):  # test[1，2，3，...，k-1,k]遍历每一个tuijian
+            RecommendDestID.append(trainNodeID[TopKIndex[i][j]])  # 推荐系统认为对第i行值得去的K个地点
+
         for g in range(k):
             if len(RealWeight)!=0:
                 temp = max(RealWeight)
                 index = RealWeight.index(temp)
                 topKRealDestID.append(RealDestID[index])
                 RealWeight[index] = 0.01
+        if len(RecommendDestID) == 0 or len(topKRealDestID) == 0:
+            realCount=realCount-1
+            continue
 
+        print("第",i,"推荐列表：",RecommendDestID)
+        print("第",i,"真实列表：",topKRealDestID)
         tempprecisionScore, temprecallScore = precision_and_recall(RecommendDestID, topKRealDestID)
+        print("第i次recall",i,temprecallScore)
+        print("第i次precosion",i,tempprecisionScore)
         precisionScore = precisionScore + tempprecisionScore
         recallScore = recallScore + temprecallScore
+        print("recall之和")
+        print(recallScore)
         NDCG = NDCG + getNDCG(RecommendDestID, topKRealDestID)
         AveragePrecision = AveragePrecision + AP(RecommendDestID, topKRealDestID)
 
@@ -211,13 +222,14 @@ def getCosineSimilarityFromOut(testEdgelist, trainResult, k):
                     break
                 else:
                     ifcomparefinish = False
-    print(RecommendCount)
-    ans = HitRatioNumber / RecommendCount
-    precisionScore = precisionScore / RecommendCount
-    recallScore = recallScore / RecommendCount
+    print(TrainResultCount)
+    print(realCount)
+    ans = HitRatioNumber / realCount
+    precisionScore = precisionScore / realCount
+    recallScore = recallScore / realCount
     F1Score = ((precisionScore * recallScore * 2) / (precisionScore + recallScore))
-    NDCG = NDCG / RecommendCount
-    MAP = AveragePrecision / RecommendCount
+    NDCG = NDCG / realCount
+    MAP = AveragePrecision / realCount
     end_time = time.time()
     cost_time = (end_time - start_time)
     print('Total time spent on loading car data {:.5f} second.'.format(cost_time))
@@ -230,7 +242,7 @@ trainResult = "E:/data/ExprimentField/test/jan/jan1/4训练结果/result.txt"
 
 
 
-Hit, precisionScore, recallScore, F1Score, NDCG, MAP, t = getCosineSimilarityFromOut(testEdgelist, trainResult, 10)
+Hit, precisionScore, recallScore, F1Score, NDCG, MAP, t = getCosineSimilarityFromOut(testEdgelist, trainResult, 5)
 # file1=open("E:/Anaconda/envs/Python35/src/code/essaycode/HYYcode/data/Percision.txt","w")
 # file1.write(str(Perc))
 # file1.close()
