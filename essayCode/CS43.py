@@ -190,7 +190,7 @@ def getCosineSimilarityFromOut(testEdgelist, trainResult, k):
             RecommendDestID.append(trainNodeID[TopKIndex[i][j]])  # 推荐系统认为对第i行值得去的K个地点
 
         for g in range(k):
-            if len(RealWeight)!=0:
+            if len(RealWeight)!=0 and max(RealWeight)!=0.01:
                 temp = max(RealWeight)
                 index = RealWeight.index(temp)
                 topKRealDestID.append(RealDestID[index])
@@ -233,8 +233,8 @@ def getCosineSimilarityFromOut(testEdgelist, trainResult, k):
     return ans, precisionScore, recallScore, F1Score, NDCG, MAP, k
 
 
-testEdgelist = "E:/data/ExprimentField/test/jan/jan1/5测试图G/test.weighted.edgelist"
-trainResult = "E:/data/ExprimentField/test/jan/jan1/4训练结果/result.txt"
+testEdgelist = "E:/data/ExprimentField/test/jan/jan4/test2.weighted.edgelist"
+trainResult = "E:/data/ExprimentField/test/jan/jan4/result.txt"
 
 
 

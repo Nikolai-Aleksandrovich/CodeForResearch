@@ -190,7 +190,7 @@ def getCosineSimilarityFromOut(testEdgelist, trainResult, k):
             RecommendDestID.append(trainNodeID[TopKIndex[i][j]])  # 推荐系统认为对第i行值得去的K个地点
 
         for g in range(k):
-            if len(RealWeight)!=0:
+            if len(RealWeight)!=0 and max(RealWeight)!=0.01:
                 temp = max(RealWeight)
                 index = RealWeight.index(temp)
                 topKRealDestID.append(RealDestID[index])
