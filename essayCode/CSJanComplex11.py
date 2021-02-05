@@ -233,8 +233,8 @@ def getCosineSimilarityFromOut(testEdgelist, trainResult, k):
     return ans, precisionScore, recallScore, F1Score, NDCG, MAP, k
 
 
-testEdgelist = "E:/data/ExprimentField/test/jan/jan2/test2.weighted.edgelist"
-trainResult = "E:/data/ExprimentField/test/jan/jan2/result.txt"
+testEdgelist = "E:/data/ExprimentField/test/jan/jan1/complex/test.weighted.edgelist"
+trainResult = "E:/data/ExprimentField/test/jan/jan1/complex/result.txt"
 
 
 

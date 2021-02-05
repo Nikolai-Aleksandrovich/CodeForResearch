@@ -233,12 +233,12 @@ def getCosineSimilarityFromOut(testEdgelist, trainResult, k):
     return ans, precisionScore, recallScore, F1Score, NDCG, MAP, k
 
 
-testEdgelist = "E:/data/ExprimentField/test/jan/jan2/test2.weighted.edgelist"
-trainResult = "E:/data/ExprimentField/test/jan/jan2/result.txt"
+testEdgelist = "E:/data/ExprimentField/test/jan/jan1/complex/test.weighted.edgelist"
+trainResult = "E:/data/ExprimentField/test/jan/jan1/complex/result.txt"
 
 
 
-Hit, precisionScore, recallScore, F1Score, NDCG, MAP, t = getCosineSimilarityFromOut(testEdgelist, trainResult, 1)
+Hit, precisionScore, recallScore, F1Score, NDCG, MAP, t = getCosineSimilarityFromOut(testEdgelist, trainResult, 5)
 # file1=open("E:/Anaconda/envs/Python35/src/code/essaycode/HYYcode/data/Percision.txt","w")
 # file1.write(str(Perc))
 # file1.close()
