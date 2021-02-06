@@ -12,9 +12,6 @@ def splitCSVtoTimeSlot(filePath):
     chunkNum = 0
     for chunk in pd.read_csv(filePath, chunksize=chunksize):
         chunkNum = chunkNum + 1
-        validateNumber = 0
-        inValidateNumber = 0
-        chunkList = [[]]
         chunkList = chunk.values.tolist()
         EdgesCount = 0
         itemsCount = 0
@@ -23,16 +20,9 @@ def splitCSVtoTimeSlot(filePath):
             itemsCount = itemsCount + 1
             if itemsCount != 1:
                 # lines = line.strip().split(",")
-                if len(line) == 14:
-                    # 判断经纬度是否为 00 0 0 如 果为0就说明这条记录无效
-                    if (line[12]) == "":
-                        continue
-                    if abs(float(line[10])) < 1e-6 and abs(float(line[11])) <= 1e-6 and abs(
-                            float(line[12])) <= 1e-6 and abs(float(line[13])) <= 1e-6:
-                        1
-                    else:
-                        EdgesCount = EdgesCount + 1
-                        edgesList.append(line)
+                if len(line) == 11:
+                    EdgesCount = EdgesCount + 1
+                    edgesList.append(line)
         timeSlot0 = []  # 22-7
         timeSlot1 = []  # 7-9
         timeSlot2 = []  # 9-12
@@ -41,8 +31,7 @@ def splitCSVtoTimeSlot(filePath):
         timeSlot5 = []  # 17-19
         timeSlot6 = []  # 19-22
         for line in edgesList:
-            EmptyTime = line[6]
-            pickUpTime = line[5]
+            pickUpTime = line[3]
 
             get_time = str(pickUpTime).rpartition(' ')[-1]
             # print(get_time)
@@ -64,15 +53,13 @@ def splitCSVtoTimeSlot(filePath):
             else:
                 timeSlot6.append(line)
 
-        with open("E:/data/ExprimentField/timedivide/trip_data6/timeSlot0.csv", "a", newline="") as csvfile:
+        with open("E:/data/ExprimentField/TimeDivideForCalculateFare/feb/timeSlot0.csv", "a", newline="") as csvfile:
             writer = csv.writer(csvfile)
             # writer.writerow(
-            #     ["medallion", "hack_license", "vendor_id", "rate_code", "store_and_fwd_flag", "pickup_datetime",
-            #      " dropoff_datetime", " passenger_count", " trip_time_in_secs", " trip_distance", " pickup_longitude",
-            #      " pickup_latitude", " dropoff_longitude", " dropoff_latitude"])
+            #     [medallion, hack_license, vendor_id, pickup_datetime, payment_type, fare_amount, surcharge, mta_tax, tip_amount, tolls_amount, total_amount])
             for row in timeSlot0:
                 writer.writerow(row)
-        with open("E:/data/ExprimentField/timedivide/trip_data6/timeSlot1.csv", "a", newline="") as csvfile:
+        with open("E:/data/ExprimentField/TimeDivideForCalculateFare/feb/timeSlot1.csv", "a", newline="") as csvfile:
             writer = csv.writer(csvfile)
             # writer.writerow(
             #     ["medallion", "hack_license", "vendor_id", "rate_code", "store_and_fwd_flag", "pickup_datetime",
@@ -80,7 +67,7 @@ def splitCSVtoTimeSlot(filePath):
             #      " pickup_latitude", " dropoff_longitude", " dropoff_latitude"])
             for row in timeSlot1:
                 writer.writerow(row)
-        with open("E:/data/ExprimentField/timedivide/trip_data6/timeSlot2.csv", "a", newline="") as csvfile:
+        with open("E:/data/ExprimentField/TimeDivideForCalculateFare/feb/timeSlot2.csv", "a", newline="") as csvfile:
             writer = csv.writer(csvfile)
             # writer.writerow(
             #     ["medallion", "hack_license", "vendor_id", "rate_code", "store_and_fwd_flag", "pickup_datetime",
@@ -88,7 +75,7 @@ def splitCSVtoTimeSlot(filePath):
             #      " pickup_latitude", " dropoff_longitude", " dropoff_latitude"])
             for row in timeSlot2:
                 writer.writerow(row)
-        with open("E:/data/ExprimentField/timedivide/trip_data6/timeSlot3.csv", "a", newline="") as csvfile:
+        with open("E:/data/ExprimentField/TimeDivideForCalculateFare/feb/timeSlot3.csv", "a", newline="") as csvfile:
             writer = csv.writer(csvfile)
             # writer.writerow(
             #     ["medallion", "hack_license", "vendor_id", "rate_code", "store_and_fwd_flag", "pickup_datetime",
@@ -96,7 +83,7 @@ def splitCSVtoTimeSlot(filePath):
             #      " pickup_latitude", " dropoff_longitude", " dropoff_latitude"])
             for row in timeSlot3:
                 writer.writerow(row)
-        with open("E:/data/ExprimentField/timedivide/trip_data6/timeSlot4.csv", "a", newline="") as csvfile:
+        with open("E:/data/ExprimentField/TimeDivideForCalculateFare/feb/timeSlot4.csv", "a", newline="") as csvfile:
             writer = csv.writer(csvfile)
             # writer.writerow(
             #     ["medallion", "hack_license", "vendor_id", "rate_code", "store_and_fwd_flag", "pickup_datetime",
@@ -104,7 +91,7 @@ def splitCSVtoTimeSlot(filePath):
             #      " pickup_latitude", " dropoff_longitude", " dropoff_latitude"])
             for row in timeSlot4:
                 writer.writerow(row)
-        with open("E:/data/ExprimentField/timedivide/trip_data6/timeSlot5.csv", "a", newline="") as csvfile:
+        with open("E:/data/ExprimentField/TimeDivideForCalculateFare/feb/timeSlot5.csv", "a", newline="") as csvfile:
             writer = csv.writer(csvfile)
             # writer.writerow(
             #     ["medallion", "hack_license", "vendor_id", "rate_code", "store_and_fwd_flag", "pickup_datetime",
@@ -112,7 +99,7 @@ def splitCSVtoTimeSlot(filePath):
             #      " pickup_latitude", " dropoff_longitude", " dropoff_latitude"])
             for row in timeSlot5:
                 writer.writerow(row)
-        with open("E:/data/ExprimentField/timedivide/trip_data6/timeSlot6.csv", "a", newline="") as csvfile:
+        with open("E:/data/ExprimentField/TimeDivideForCalculateFare/feb/timeSlot6.csv", "a", newline="") as csvfile:
             writer = csv.writer(csvfile)
             # writer.writerow(
             #     ["medallion", "hack_license", "vendor_id", "rate_code", "store_and_fwd_flag", "pickup_datetime",
@@ -137,5 +124,5 @@ def splitCSVtoTimeSlot(filePath):
         print("--------Done!--------")
 
 
-filePath = "E:/data/ExprimentField/manhatan/trip_data6_Manhatan.csv"
+filePath = "E:/data/FOIL2012/FOIL2012UNPACKED/trip_fare_2.csv"
 splitCSVtoTimeSlot(filePath)

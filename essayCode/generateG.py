@@ -475,6 +475,8 @@ Jan6TaxiFilePathTest = "E:/data/ExprimentField/test/jan/jan6/test.csv"
 Feb0TaxiFilePathTest = "E:/data/ExprimentField/test/feb/feb0/test.csv"
 Feb1TaxiFilePathTest = "E:/data/ExprimentField/test/feb/feb1/test.csv"
 
+
+Jan1Top15TaxiFilePath = "E:/data/ExprimentField/TaxiDataWithFare/jan/jan1/Top15Data.csv"
 IfPrint = 0
 # G = getAttrFromCSVtoGraph(filePathtest, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getAttrFromCSVtoGraph(filePath1, G, lontitudelatitudeArray, mytree, IfPrint)
