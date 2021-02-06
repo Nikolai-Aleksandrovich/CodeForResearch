@@ -39,22 +39,22 @@ def findGoodAndBad(filePath):
         for i in range(int(TenPercent*1.5)):
             Bottom15Medallion.append(m[i][0])
             Bottom15Income.append(m[i][1])
-    fileObject = open("E:/data/ExprimentField/TaxiDataWithFare/jan/jan1/Top15Medallion.csv", 'w')
+    fileObject = open("E:/data/ExprimentField/TaxiDataWithFare/feb/feb1/Top15Medallion.csv", 'w')
     for ip in Top15Medallion:
         fileObject.write(str(ip))
         fileObject.write('\n')
     fileObject.close()
-    fileObject = open("E:/data/ExprimentField/TaxiDataWithFare/jan/jan1/Top15Income.csv", 'w')
+    fileObject = open("E:/data/ExprimentField/TaxiDataWithFare/feb/feb1/Top15Income.csv", 'w')
     for ip in Top15Income:
         fileObject.write(str(ip))
         fileObject.write('\n')
     fileObject.close()
-    fileObject = open("E:/data/ExprimentField/TaxiDataWithFare/jan/jan1/Bottom15Medallion.csv", 'w')
+    fileObject = open("E:/data/ExprimentField/TaxiDataWithFare/feb/feb1/Bottom15Medallion.csv", 'w')
     for ip in Bottom15Medallion:
         fileObject.write(str(ip))
         fileObject.write('\n')
     fileObject.close()
-    fileObject = open("E:/data/ExprimentField/TaxiDataWithFare/jan/jan1/Bottom15Income.csv", 'w')
+    fileObject = open("E:/data/ExprimentField/TaxiDataWithFare/feb/feb1/Bottom15Income.csv", 'w')
     for ip in Bottom15Income:
         fileObject.write(str(ip))
         fileObject.write('\n')
@@ -90,19 +90,19 @@ def filterDataBasedOnGoodAndBad(Top15Medallion,Bottom15Medallion,taxidata):
                 Top15Data.append(line)
             if line[0] in Bottom15Medallion:
                 Bottom15Data.append(line)
-    with open("E:/data/ExprimentField/TaxiDataWithFare/jan/jan1/Top15Data.csv", "a", newline="") as csvfile:
+    with open("E:/data/ExprimentField/TaxiDataWithFare/feb/feb1/Top15Data.csv", "a", newline="") as csvfile:
         writer = csv.writer(csvfile)
             # writer.writerow(
             #     [medallion, hack_license, vendor_id, pickup_datetime, payment_type, fare_amount, surcharge, mta_tax, tip_amount, tolls_amount, total_amount])
         for row in Top15Data:
             writer.writerow(row)
-    with open("E:/data/ExprimentField/TaxiDataWithFare/jan/jan1/Bottom15Data.csv", "a", newline="") as csvfile:
+    with open("E:/data/ExprimentField/TaxiDataWithFare/feb/feb1/Bottom15Data.csv", "a", newline="") as csvfile:
         writer = csv.writer(csvfile)
         for row in Bottom15Data:
             writer.writerow(row)
 
 
-FareData = "E:/data/ExprimentField/TimeDivideForCalculateFare/jan/timeSlot1.csv"
-OriginalTaxiData = "E:/data/ExprimentField/test/jan/jan1/timeSlot1.csv"
+FareData = "E:/data/ExprimentField/TimeDivideForCalculateFare/feb/timeSlot1.csv"
+OriginalTaxiData = "E:/data/ExprimentField/test/feb/feb1/timeSlot1.csv"
 Top15Medallion,Bottom15Medallion=findGoodAndBad(FareData)
 filterDataBasedOnGoodAndBad(Top15Medallion,Bottom15Medallion,OriginalTaxiData)

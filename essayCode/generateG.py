@@ -477,6 +477,10 @@ Feb1TaxiFilePathTest = "E:/data/ExprimentField/test/feb/feb1/test.csv"
 
 
 Jan1Top15TaxiFilePath = "E:/data/ExprimentField/TaxiDataWithFare/jan/jan1/Top15Data.csv"
+Feb1Top15TaxiFilePath = "E:/data/ExprimentField/TaxiDataWithFare/feb/feb1/Top15Data.csv"
+
+Jan1Bottom15TaxiFilePath = "E:/data/ExprimentField/TaxiDataWithFare/jan/jan1/Bottom15Data.csv"
+Feb1Bottom15TaxiFilePath = "E:/data/ExprimentField/TaxiDataWithFare/feb/feb1/Bottom15Data.csv"
 IfPrint = 0
 # G = getAttrFromCSVtoGraph(filePathtest, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getAttrFromCSVtoGraph(filePath1, G, lontitudelatitudeArray, mytree, IfPrint)
@@ -486,7 +490,7 @@ IfPrint = 0
 # G = getAttrFromCSVtoGraph(filePath5, G, lontitudelatitudeArray, mytree, IfPrint)
 # # G = getAttrFromCSVtoGraph(filePath6, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = deleteNode(G, 0)
-G = getEdgesFromCSVtoGraph(Feb1TaxiFilePathTest , G, lontitudelatitudeArray, mytree, IfPrint)
+G = getEdgesFromCSVtoGraph(Feb1Bottom15TaxiFilePath , G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getEdgesFromCSVtoGraph(filePath1, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getEdgesFromCSVtoGraph(filePath2, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getEdgesFromCSVtoGraph(filePath3, G, lontitudelatitudeArray, mytree, IfPrint)
