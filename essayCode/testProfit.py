@@ -132,7 +132,7 @@ def cosine_similarity(x, y, norm=False):
 def getCosineSimilarityFromOut(Bottom15Data, Top15trainResult,IdToGPSMapFile,Bottom15Income, k):
     global IDCount
     start_time = time.time()
-    # 80%训练样本的Result.txt
+    # top15 Result.txt
     try:
         f = open(Top15trainResult)
     except IOError:
@@ -147,9 +147,10 @@ def getCosineSimilarityFromOut(Bottom15Data, Top15trainResult,IdToGPSMapFile,Bot
         EdgeListNodeList.append(lines)
 
     TrainResult = np.array(EdgeListNodeList, dtype=float)
-    # print(EdgeListNode)
+    f.close()
+    #print('Top15Result',TrainResult)
 
-    # 测试数据的edgelist文件
+    # Bottom15Data
     try:
         f = open(Bottom15Data)
     except IOError:
@@ -162,9 +163,11 @@ def getCosineSimilarityFromOut(Bottom15Data, Top15trainResult,IdToGPSMapFile,Bot
         lines = line.strip().split(",")
         Data.append(lines)
     Bottom15Data = np.array(Data)
+    f.close()
+    #print('Bottom15data',Bottom15Data)
     # 得到最弱的15
 
-    # 测试数据的edgelist文件
+    # 累加收入
     try:
         f = open(Bottom15Income)
     except IOError:
@@ -177,9 +180,15 @@ def getCosineSimilarityFromOut(Bottom15Data, Top15trainResult,IdToGPSMapFile,Bot
         lines = line.strip().split('/n')
         Income.append(lines)
     Bottom15Income = np.array(Income, dtype=float)
-    TotalBottom15Income=0;
+    TotalBottom15Income=0
+    print(len(Bottom15Income))
+    b=0
     for list in Bottom15Income:
-        TotalBottom15Income=float(list[0])
+        b=b+1
+        TotalBottom15Income=float(list[0])+TotalBottom15Income
+
+    f.close()
+    # print('TotalBottom15Income',TotalBottom15Income)
     # 得到最弱的15
 
     # 测试数据的edgelist文件
@@ -193,14 +202,20 @@ def getCosineSimilarityFromOut(Bottom15Data, Top15trainResult,IdToGPSMapFile,Bot
         lines = line.strip().split(",")
         if lines[8] not in IdToGPSDict:
             IdToGPSDict[lines[8]]=[float(lines[6]),float(lines[7])]
-
-    #得到字典{ID:[la,long]}
+    f.close()
+    # print('idToGPSDict',IdToGPSDict)
+    #得到字典{ID:[la,long]},'3116': [40.720914, -74.001493]
     trainNodeID = []  # 较大训练数据集节点ID
 
     finalCSList = [[] for i in range(TrainResultCount)]
     a = 0
+    for line in Bottom15Data:
 
+        print('Bottom',line[0])
+    for line in TrainResult:
+        print('TrainResult',line[0])
     for trainArray in TrainResult:
+
         CSListForEachRow = []
         trainNodeID.append(trainArray[0])
         trainVector = np.delete(trainArray, 0)
@@ -220,21 +235,27 @@ def getCosineSimilarityFromOut(Bottom15Data, Top15trainResult,IdToGPSMapFile,Bot
         for j in range(0, k):
             TopKIndex[i].append(temp.index(max(temp)))
             temp[temp.index(max(temp))] = 0.001
-
+    # print('TopKIndex',TopKIndex)
     TotalIncome = 0
     TotalDistance = 0
     TotalTime = 0
     RecommendCount=0
     realCount = TrainResultCount
-    for i in range(0,TrainResultCount):
+    for line1 in Bottom15Data:
+        print('line1',line1[0])
         RecommendDestID = []
-        currentStartID=0
-        ToThisPlaceCount=0
-        for line in Bottom15Data:
-            currentStartID=line[0]
-            ToThisPlaceCount=line[2]
-            if (trainNodeID[i] == line[0]):
-                RecommendDestID.append(trainNodeID[TopKIndex[i][0]])
+        currentStartID = line1[0]
+        ToThisPlaceCount = line1[2]
+        index = 0
+        for line2 in TrainResult:
+            print('line2',line2[0])
+            if (line2[0] == line1[0]) and ToThisPlaceCount!=0:
+                tempID=TopKIndex[index][ToThisPlaceCount-1]
+                RecommendDestID.append(tempID)
+                index=index+1
+                ToThisPlaceCount=ToThisPlaceCount-1
+        # print('RecommendID',RecommendDestID)
+        # print('CurrentID',currentStartID)
         for i in range(len(RecommendDestID)):
             StartLa = IdToGPSDict[currentStartID][0]
             StartLong = IdToGPSDict[currentStartID][1]
@@ -243,6 +264,13 @@ def getCosineSimilarityFromOut(Bottom15Data, Top15trainResult,IdToGPSMapFile,Bot
             distance = haversine(StartLong, StartLa, EndLong, EndLa)
             TotalDistance=distance+TotalDistance
             TotalIncome=fare(distance*0.62137)+TotalIncome
+            print('startLA',StartLa)
+            print('SratLONG',StartLong)
+            print('EndLa',EndLa)
+            print('EndLong',EndLong)
+            print('Distance',distance)
+            print('TotalDistance',TotalDistance)
+            print('TotalIncome',TotalIncome)
 
 
     print(TrainResultCount)
@@ -255,23 +283,12 @@ def getCosineSimilarityFromOut(Bottom15Data, Top15trainResult,IdToGPSMapFile,Bot
     return TotalIncome,TotalDistance,TotalTime,TotalBottom15Income
 
 
-Bottom15Data = "E:/data/ExprimentField/TaxiDataWithFare/feb/feb1/Bottom15Data.csv"
-Top15trainResult = "E:/data/ExprimentField/TaxiDataWithFare/feb/feb1/result.txt"
-Bottom15Income= "E:/data/ExprimentField/TaxiDataWithFare/feb/feb1/Bottom15Income.csv"
-IdToGPSMapFile = "E:/data/ExprimentField/test/Poi_NYC_Manhatan_GridDivideFinal.csv"
+Bottom15Data = "D:/data/ExperimentField/TaxiDataWithFare/feb/feb1/Bottom15Data.csv"
+Top15trainResult = "D:/data/ExperimentField/TaxiDataWithFare/feb/feb1/result.txt"
+Bottom15Income= "D:/data/ExperimentField/TaxiDataWithFare/feb/feb1/Bottom15Income.csv"
+IdToGPSMapFile = "D:/data/ExperimentField/test/Poi_NYC_Manhatan_GridDivideFinal.csv"
 
 
 
 TotalIncome,TotalDistance,TotalTime,TotalBottom15Income = getCosineSimilarityFromOut(Bottom15Data, Top15trainResult,IdToGPSMapFile,Bottom15Income, 3)
 print(TotalIncome,TotalDistance,TotalTime,TotalBottom15Income  )
-# file1=open("E:/Anaconda/envs/Python35/src/code/essaycode/HYYcode/data/Percision.txt","w")
-# file1.write(str(Perc))
-# file1.close()
-# file2=open("E:/Anaconda/envs/Python35/src/code/essaycode/HYYcode/data/recall.txt","w")
-# file2.write(str(reca))
-# file2.close()
-
-
-# file3 = open("E:/Anaconda/envs/Python35/src/code/essaycode/HYYcode/data/FHit.txt", "w")
-# file3.write(str(Hit))
-# file3.close()
