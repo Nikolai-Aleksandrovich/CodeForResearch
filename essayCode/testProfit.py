@@ -160,7 +160,7 @@ def getCosineSimilarityFromOut(Bottom15Data, Top15trainResult,IdToGPSMapFile,Bot
     Data = []
     for line in f.readlines():
         TestitemsCount = TestitemsCount + 1
-        lines = line.strip().split(",")
+        lines = line.strip().split(" ")
         Data.append(lines)
     Bottom15Data = np.array(Data)
     f.close()
@@ -209,11 +209,11 @@ def getCosineSimilarityFromOut(Bottom15Data, Top15trainResult,IdToGPSMapFile,Bot
 
     finalCSList = [[] for i in range(TrainResultCount)]
     a = 0
-    for line in Bottom15Data:
-
-        print('Bottom',line[0])
-    for line in TrainResult:
-        print('TrainResult',line[0])
+    # for line in Bottom15Data:
+    #
+    #     print('Bottom',line[0])
+    # for line in TrainResult:
+    #     print('TrainResult',line[0])
     for trainArray in TrainResult:
 
         CSListForEachRow = []
@@ -242,13 +242,13 @@ def getCosineSimilarityFromOut(Bottom15Data, Top15trainResult,IdToGPSMapFile,Bot
     RecommendCount=0
     realCount = TrainResultCount
     for line1 in Bottom15Data:
-        print('line1',line1[0])
+        # print('line1',line1[0])
         RecommendDestID = []
         currentStartID = line1[0]
         ToThisPlaceCount = line1[2]
         index = 0
         for line2 in TrainResult:
-            print('line2',line2[0])
+            # print('line2',line2[0])
             if (line2[0] == line1[0]) and ToThisPlaceCount!=0:
                 tempID=TopKIndex[index][ToThisPlaceCount-1]
                 RecommendDestID.append(tempID)
@@ -283,7 +283,7 @@ def getCosineSimilarityFromOut(Bottom15Data, Top15trainResult,IdToGPSMapFile,Bot
     return TotalIncome,TotalDistance,TotalTime,TotalBottom15Income
 
 
-Bottom15Data = "D:/data/ExperimentField/TaxiDataWithFare/feb/feb1/Bottom15Data.csv"
+Bottom15Data = "D:/data/ExperimentField/TaxiDataWithFare/feb/feb1/test2.weighted.edgelist"
 Top15trainResult = "D:/data/ExperimentField/TaxiDataWithFare/feb/feb1/result.txt"
 Bottom15Income= "D:/data/ExperimentField/TaxiDataWithFare/feb/feb1/Bottom15Income.csv"
 IdToGPSMapFile = "D:/data/ExperimentField/test/Poi_NYC_Manhatan_GridDivideFinal.csv"

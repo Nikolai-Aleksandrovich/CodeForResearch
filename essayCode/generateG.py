@@ -445,7 +445,7 @@ def haversine(lon1, lat1, lon2, lat2):  # 经度1，纬度1，经度2，纬度2 
 G = nx.DiGraph()
 
 # 创建图中的一类节点 为POI bipartite=0
-POIFilePath = "D:/data/ExprimentField/test/POIData/Poi_NYC_Manhatan_GridDivideFinal.csv"
+POIFilePath = "D:/data/ExperimentField/test/POIData/Poi_NYC_Manhatan_GridDivideFinal.csv"
 G, lontitudelatitudeArray = getPOIFromCSVtoGraph(POIFilePath, G)
 # print lontitudelatitudeArray
 # 创建POI坐标的KDTree
@@ -480,7 +480,7 @@ Jan1Top15TaxiFilePath = "E:/data/ExprimentField/TaxiDataWithFare/jan/jan1/Top15D
 Feb1Top15TaxiFilePath = "E:/data/ExprimentField/TaxiDataWithFare/feb/feb1/Top15Data.csv"
 
 Jan1Bottom15TaxiFilePath = "E:/data/ExprimentField/TaxiDataWithFare/jan/jan1/Bottom15Data.csv"
-Feb1Bottom15TaxiFilePath = "D:/data/ExprimentField/TaxiDataWithFare/feb/feb1/Bottom15Data.csv"
+Feb1Bottom15TaxiFilePath = "D:/data/ExperimentField/TaxiDataWithFare/feb/feb1/Bottom15Data.csv"
 IfPrint = 0
 # G = getAttrFromCSVtoGraph(filePathtest, G, lontitudelatitudeArray, mytree, IfPrint)
 # G = getAttrFromCSVtoGraph(filePath1, G, lontitudelatitudeArray, mytree, IfPrint)
